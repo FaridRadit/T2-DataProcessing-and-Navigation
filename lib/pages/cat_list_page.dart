@@ -5,9 +5,7 @@ import '../main.dart';
 
 class CatDetailPage extends StatelessWidget {
   final Cat cat;  
-
   const CatDetailPage({super.key, required this.cat}); 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,6 +83,7 @@ class CatCard extends StatelessWidget {
                 ],
               ),
             ),
+            Center(child: FavoriteButton(),),
           ],
         ),
       ),
@@ -102,5 +101,32 @@ class CatListPage extends StatelessWidget {
        return CatCard(cats: catList[index],);
       }
       );
+  }
+}
+
+class FavoriteButton extends StatefulWidget {
+  const FavoriteButton({super.key});
+
+  @override
+  _FavoriteButtonState createState() => _FavoriteButtonState();
+}
+
+class _FavoriteButtonState extends State<FavoriteButton> {
+  bool isFavorite = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        isFavorite ? Icons.favorite : Icons.favorite_border,
+        color: isFavorite ? Colors.red : Colors.grey,
+      ),
+      iconSize: 30,
+      onPressed: () {
+        setState(() {
+          isFavorite = !isFavorite;
+        });
+      },
+    );
   }
 }
